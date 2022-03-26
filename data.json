@@ -1,0 +1,157 @@
+[
+    {
+        "id": 1,
+        "cssclass":"each-job-list",
+        "title" :"Senior Software Engineer",
+        "timepost": "5h ago",
+        "time": "Full Time",
+        "companyname": "Velto",
+        "companylogo": "src/icons/logo-1.jpeg",
+        "country": "United Kingdom",
+        "link": "src/pages/job-one.html"
+
+    },
+
+    {
+        "id": 2,
+        "cssclass":"each-job-list",
+        "title" :"UI/UX Designer",
+        "timepost": "20h ago",
+        "time": "Part Time",
+        "companyname": "Blogr",
+        "companylogo": "src/icons/logo-2.jpeg",
+        "country": "United States",
+        "link": "src/pages/job-two.html"
+
+    },
+
+    {
+        "id": 3,
+        "cssclass":"each-job-list",
+        "title" :"Back End Engineer",
+        "timepost": "1d ago",
+        "time": "Part Time",
+        "companyname": "Vector",
+        "companylogo": "src/icons/logo-3.jpeg",
+        "country": "Russia",
+        "link": "src/pages/job-three.html"
+
+    },
+
+    {
+        "id": 4,
+        "cssclass":"each-job-list",
+        "title" :"Senior App Engineer",
+        "timepost": "2d ago",
+        "time": "Full Time",
+        "companyname": "Office Lite",
+        "companylogo": "src/icons/logo-4.jpeg",
+        "country": "Japan",
+        "link": "src/pages/job-four.html"
+
+    },
+
+    {
+        "id": 5,
+        "cssclass":"each-job-list",
+        "title" :"Remote DevOps Engineer",
+        "timepost": "2d ago",
+        "time": "Part Time",
+        "companyname": "Pod",
+        "companylogo": "src/icons/logo-5.jpeg",
+        "country": "Thailand",
+        "link": "src/pages/job-five.html"
+
+    },
+
+    {
+        "id": 6,
+        "cssclass":"each-job-list",
+        "title" :"Desktop Support Manager",
+        "timepost": "4d ago",
+        "time": "Part Time",
+        "companyname": "Creative",
+        "companylogo": "src/icons/logo-6.jpeg",
+        "country": "Germany",
+        "link": "src/pages/job-six.html"
+
+    },
+
+    {
+        "id": 7,
+        "cssclass":"each-job-list",
+        "title" :"iOS Engineer",
+        "timepost": "1w ago",
+        "time": "Full Time",
+        "companyname": "Pomodromo",
+        "companylogo": "src/icons/logo-7.jpeg",
+        "country": "United States",
+        "link": "src/pages/job-seven.html"
+
+    },
+
+    {
+        "id": 8,
+        "cssclass":"each-job-list",
+        "title" :"Senior EJB Developer",
+        "timepost": "1w ago",
+        "time": "Full Time",
+        "companyname": "Marker",
+        "companylogo": "src/icons/logo-8.jpeg",
+        "country": "United Kingdom",
+        "link": "src/pages/job-eight.html"
+
+    },
+
+    {
+        "id": 9,
+        "cssclass":"each-job-list",
+        "title" :"Senior FrontEnd Developer",
+        "timepost": "1w ago",
+        "time": "Part Time",
+        "companyname": "Risters",
+        "companylogo": "src/icons/logo-9.jpeg",
+        "country": "Singapore",
+        "link": "src/pages/job-nine.html"
+
+    },
+
+    {
+        "id": 10,
+        "cssclass":"each-job-list",
+        "title" :"App Designer & Developer",
+        "timepost": "2w ago",
+        "time": "Freelance",
+        "companyname": "Masterkraft",
+        "companylogo": "src/icons/logo-10.jpeg",
+        "country": "United States",
+        "link": "src/pages/job-ten.html"
+
+    },
+
+    {
+        "id": 11,
+        "cssclass":"each-job-list",
+        "title" :"Full Stack Developer",
+        "timepost": "1mo ago",
+        "time": "Part Time",
+        "companyname": "CrowdFund",
+        "companylogo": "src/icons/logo-11.jpeg",
+        "country": "New Zealand",
+        "link": "src/pages/job-eleven.html"
+
+    },
+
+    {
+        "id": 12,
+        "cssclass":"each-job-list",
+        "title" :"Technical Lead Engineer",
+        "timepost": "1mo ago",
+        "time": "Part Time",
+        "companyname": "TypeMaster",
+        "companylogo": "src/icons/logo-12.jpeg",
+        "country": "United Kingdom",
+        "link": "src/pages/job-twelve.html"
+
+    }
+]
