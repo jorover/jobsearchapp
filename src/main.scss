@@ -235,7 +235,7 @@ footer,
   padding: 10px;
 }
 
-#search-bar {
+.search-bar {
   width: 100%;
   height: inherit;
   border: none;
@@ -243,11 +243,11 @@ footer,
   padding: 8px;
 }
 
-#search-bar:focus {
+.search-bar:focus {
   outline: none;
 }
 
-#search-bar::placeholder {
+.search-bar::placeholder {
   opacity: 1;
 }
 

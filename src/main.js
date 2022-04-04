@@ -2,14 +2,13 @@ const jobList = document.querySelector('.job-listing');
 const toggle = document.querySelector('.toggle');
 let eachJobList = document.querySelector('.job-listing');
 const searchBar = document.querySelector('.job-search-bar');
-const searchInput = document.querySelectorAll('#search-bar');
+const searchInput = document.querySelectorAll('.search-bar');
 const formControl = document.querySelectorAll('.form-control');
 const searchBtn = document.querySelector('.search-btn');
 const jobSearchBar = document.querySelector('.job-search-bar');
 let eachElement = eachJobList.children;
 const only = document.querySelector('.only');
 const lister = document.querySelector('.lister');
-
 
 
 
@@ -122,17 +121,13 @@ const loadData = async () => {
 loadData();
 
 
-
-
-
-
-const filterTitle = async (inputVal) => {
+const filterJobs = async (inputVal) => {
     const data = await (await fetch('./data.json')).json();
     let toggleCheck = localStorage.getItem('toggle');
-    jobList.innerHTML = ''
+    jobList.innerHTML = '';
     const filtered = data.filter(eachItem => {
-        if(eachItem.title === inputVal || eachItem.title.includes(inputVal)){
-          const {id, title, cssclass, timepost, time, companyname, companylogo, country, link} = eachItem;
+        const {id, title, cssclass, timepost, time, companyname, companylogo, country, link} = eachItem;
+        if(title.toUpperCase() === inputVal || title.toUpperCase().includes(inputVal)){
           return jobList.innerHTML +=`<article key="${id}" class=${cssclass}> 
           <img src=${companylogo} alt="companylogo" />
           <p>${timepost} <a class="time"> ${time}</a></p>
@@ -152,22 +147,23 @@ const filterTitle = async (inputVal) => {
     return filtered;
 }
 
+
 const filterLocation = async (inputVal) => {
     const data = await (await fetch('./data.json')).json();
     let toggleCheck = localStorage.getItem('toggle');
-    jobList.innerHTML = ''
+    jobList.innerHTML = '';
     const filtered = data.filter(eachItem => {
-        if(eachItem.country === inputVal || eachItem.country.includes(inputVal)){
-            const {id, cssclass, title, timepost, time, companyname, companylogo, link, country} = eachItem;
-            jobList.innerHTML += `<article key="${id}" class=${cssclass}> 
-            <img src=${companylogo} alt="companylogo" />
-            <p>${timepost} <a class="time"> ${time}</a></p>
-            <a href=${link}>
-                <h4 class="title">${title}</h4>
-            </a>
-            <p class="comp">${companyname} </p>
-            <p class="country"><span> ${country} </span></p>    
-            </article>`
+        const {id, title, cssclass, timepost, time, companyname, companylogo, country, link} = eachItem;
+        if(country.toUpperCase() === inputVal || country.toUpperCase().includes(inputVal)){
+          return jobList.innerHTML +=`<article key="${id}" class=${cssclass}> 
+          <img src=${companylogo} alt="companylogo" />
+          <p>${timepost} <a class="time"> ${time}</a></p>
+          <a href=${link}>
+              <h4 class="title">${title}</h4>
+          </a>
+          <p class="comp">${companyname} </p>
+          <p class="country"><span> ${country} </span></p>    
+          </article>`
         }
     })
 
@@ -184,8 +180,8 @@ const fullTime = async () => {
     let toggleCheck = localStorage.getItem('toggle');
     jobList.innerHTML = '';
     const filtered = data.filter(item => {
+        const {id, cssclass, title, timepost, time, companyname, companylogo, country, link} = item;
         if(item.time === 'Full Time'){
-            const {id, cssclass, title, timepost, time, companyname, companylogo, country, link} = item;
             jobList.innerHTML += `<article key="${id}" class=${cssclass}> 
             <img src=${companylogo} alt="companylogo" />
             <p>${timepost} <a class="time"> ${time}</a></p>
@@ -211,8 +207,8 @@ const filterTitleLocation = async(firstVal, secondVal) => {
     let toggleCheck = localStorage.getItem('toggle');
     jobList.innerHTML = '';
     const filtered = data.filter(eachItem => {
-        if((eachItem.title === firstVal || eachItem.title.includes(firstVal)) && (eachItem.country === secondVal || eachItem.country.includes(secondVal))){
-            const {id, cssclass, title, timepost, time, companyname, companylogo, country, link} = eachItem;
+        const {id, cssclass, title, timepost, time, companyname, companylogo, country, link} = item;
+        if((title.toUpperCase() === firstVal || title.toUpperCase().includes(firstVal)) && (country.toUpperCase() === secondVal || country.toUpperCase().includes(secondVal))){
             jobList.innerHTML += `<article key="${id}" class=${cssclass}> 
             <img src=${companylogo} alt="companylogo" />
             <p>${timepost} <a class="time"> ${time}</a></p>
@@ -235,27 +231,21 @@ const filterTitleLocation = async(firstVal, secondVal) => {
 
 const submitSearch = () => {
     searchBtn.addEventListener('click', ()=> {
-        let firstValue = searchInput[0].value;
-        let firstLetterValue = firstValue.charAt(0);
-        let capsFirstValue = firstLetterValue.toUpperCase();
-        let finalFirstValue = firstValue.replace(firstLetterValue, capsFirstValue);
-        let secondValue = searchInput[1].value;
-        let secondLetterValue = secondValue.charAt(0);
-        let secondcapsFirstValue = secondLetterValue.toUpperCase();
-        let secondfinalFirstValue = firstValue.replace(secondLetterValue, secondcapsFirstValue);
+        let firstValue = searchInput[0].value.toUpperCase();
+        let secondValue = searchInput[1].value.toUpperCase();
         let checkBox = document.querySelector('#checkbox');
         let toggler = localStorage.getItem('toggle');
 
         if(firstValue){
-            filterTitle(finalFirstValue);
+            filterJobs(firstValue);
         } 
 
         if(secondValue){
-            filterLocation(secondfinalFirstValue);
+            filterLocation(secondValue);
         }
 
         if(firstValue && secondValue){
-            filterTitleLocation(finalFirstValue, secondfinalFirstValue);
+            filterTitleLocation(firstValue, secondValue);
         }
 
         if(checkBox.checked){
@@ -309,3 +299,15 @@ const eachJobListBg = (list) => {
     return newElement;
 }
 
+
+
+searchInput.forEach(eachSearchBar => {
+    eachSearchBar.addEventListener('keyup', (e) => {
+        const searchBar = e.currentTarget.classList;
+        if(searchBar.contains('title-search')){
+            filterJobs(eachSearchBar.value.toUpperCase());
+        } else {
+            filterLocation(eachSearchBar.value.toUpperCase());
+        }
+    })
+})
