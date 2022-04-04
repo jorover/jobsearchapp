@@ -114,6 +114,8 @@ const loadData = async () => {
     })
 
     checkForToggle();
+
+    
     return eachData;
     
 }
@@ -121,13 +123,13 @@ const loadData = async () => {
 loadData();
 
 
-const filterJobs = async (inputVal) => {
+const filterJobs = async (firstValue, secondValue) => {
     const data = await (await fetch('./data.json')).json();
     let toggleCheck = localStorage.getItem('toggle');
     jobList.innerHTML = '';
     const filtered = data.filter(eachItem => {
         const {id, title, cssclass, timepost, time, companyname, companylogo, country, link} = eachItem;
-        if(title.toUpperCase() === inputVal || title.toUpperCase().includes(inputVal)){
+        if(title.toUpperCase() === firstValue || title.toUpperCase().includes(firstValue)){
           return jobList.innerHTML +=`<article key="${id}" class=${cssclass}> 
           <img src=${companylogo} alt="companylogo" />
           <p>${timepost} <a class="time"> ${time}</a></p>
@@ -138,10 +140,28 @@ const filterJobs = async (inputVal) => {
           <p class="country"><span> ${country} </span></p>    
           </article>`
         }
+
+        if(country.toUpperCase() === secondValue || country.toUpperCase().includes(secondValue)){
+            return jobList.innerHTML +=`<article key="${id}" class=${cssclass}> 
+            <img src=${companylogo} alt="companylogo" />
+            <p>${timepost} <a class="time"> ${time}</a></p>
+            <a href=${link}>
+                <h4 class="title">${title}</h4>
+            </a>
+            <p class="comp">${companyname} </p>
+            <p class="country"><span> ${country} </span></p>    
+            </article>`
+        }
     })
 
     if(toggleCheck){
         eachJobListBg(eachElement)
+    }
+
+    if(filtered === undefined){
+        console.log('red')
+    } else {
+        countingElements(filtered)
     }
 
     return filtered;
@@ -171,6 +191,12 @@ const filterLocation = async (inputVal) => {
         eachJobListBg(eachElement)
     }
 
+    if(filtered === undefined){
+        console.log('red')
+    } else {
+        countingElements(filtered)
+    }
+
     return filtered;
 }
 
@@ -182,7 +208,7 @@ const fullTime = async () => {
     const filtered = data.filter(item => {
         const {id, cssclass, title, timepost, time, companyname, companylogo, country, link} = item;
         if(item.time === 'Full Time'){
-            jobList.innerHTML += `<article key="${id}" class=${cssclass}> 
+            return jobList.innerHTML += `<article key="${id}" class=${cssclass}> 
             <img src=${companylogo} alt="companylogo" />
             <p>${timepost} <a class="time"> ${time}</a></p>
             <a href=${link}>
@@ -207,9 +233,9 @@ const filterTitleLocation = async(firstVal, secondVal) => {
     let toggleCheck = localStorage.getItem('toggle');
     jobList.innerHTML = '';
     const filtered = data.filter(eachItem => {
-        const {id, cssclass, title, timepost, time, companyname, companylogo, country, link} = item;
+        const {id, cssclass, title, timepost, time, companyname, companylogo, country, link} = eachItem;
         if((title.toUpperCase() === firstVal || title.toUpperCase().includes(firstVal)) && (country.toUpperCase() === secondVal || country.toUpperCase().includes(secondVal))){
-            jobList.innerHTML += `<article key="${id}" class=${cssclass}> 
+            return jobList.innerHTML += `<article key="${id}" class=${cssclass}> 
             <img src=${companylogo} alt="companylogo" />
             <p>${timepost} <a class="time"> ${time}</a></p>
             <a href=${link}>
@@ -225,6 +251,12 @@ const filterTitleLocation = async(firstVal, secondVal) => {
         eachJobListBg(eachElement)
     }
 
+    if(filtered === undefined){
+        console.log('red')
+    } else {
+        countingElements(filtered)
+    }
+
     return filtered;
 }
 
@@ -234,7 +266,6 @@ const submitSearch = () => {
         let firstValue = searchInput[0].value.toUpperCase();
         let secondValue = searchInput[1].value.toUpperCase();
         let checkBox = document.querySelector('#checkbox');
-        let toggler = localStorage.getItem('toggle');
 
         if(firstValue){
             filterJobs(firstValue);
@@ -306,8 +337,17 @@ searchInput.forEach(eachSearchBar => {
         const searchBar = e.currentTarget.classList;
         if(searchBar.contains('title-search')){
             filterJobs(eachSearchBar.value.toUpperCase());
+            
         } else {
             filterLocation(eachSearchBar.value.toUpperCase());
         }
     })
 })
+
+
+const countingElements = (countingData) => {
+      if(countingData.length < 1){
+          return jobList.innerHTML = '<h3 class="error-message"><span> Your search parameters may be wrong, please try again!! </span> </h3>'
+      }
+      
+}
